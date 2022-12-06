@@ -26,7 +26,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index dd13fc7cbf82948b1474ea33411e64b465608672..9c335861328af27dca569021358821db92943dc6 100644
+index dd13fc7cbf82948b1474ea33411e64b465608672..76fe61e93863aaaab2cbda880aca35670665fdf6 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -880,7 +880,13 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
@@ -35,7 +35,7 @@ index dd13fc7cbf82948b1474ea33411e64b465608672..9c335861328af27dca569021358821db
          if (!this.level.isClientSide) {
 -            this.setSharedFlagOnFire(this.remainingFireTicks > 0);
 +            // Slice start - Don't send fire packets if player has fire resistance
-+            if (simplest.bee.BeeWorldConfig.dontSendFirePacketsIfPlayerHasFireResistance && this instanceof net.minecraft.world.entity.LivingEntity livingEntity) {
++            if (level.beeConfig.dontSendFirePacketsIfPlayerHasFireResistance && this instanceof net.minecraft.world.entity.LivingEntity livingEntity) {
 +                this.setSharedFlagOnFire(this.remainingFireTicks > 0 && !livingEntity.hasEffect(net.minecraft.world.effect.MobEffects.FIRE_RESISTANCE));
 +            } else {
 +                this.setSharedFlagOnFire(this.remainingFireTicks > 0);
