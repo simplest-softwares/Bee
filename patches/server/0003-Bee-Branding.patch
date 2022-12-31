@@ -6,7 +6,7 @@ Subject: [PATCH] Bee Branding
 The version fetcher was orginally created by Pearl (https://github.com/Pearl-Project/Pearl/blob/main/patches/server/0001-Pearl-Rebrand.patch#L64)
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 6c93b36f1faa8758c86f33ab9f9fe9207c21d2fc..ac387b9680724a08fa2f52c242ce9e7dca6fb704 100644
+index 907fffc9323d332a492871acbac9b1d2b2a5b0b3..c4b685e08bb1b931b699b13b31417303dfbfc119 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -7,7 +7,7 @@ plugins {
@@ -16,9 +16,9 @@ index 6c93b36f1faa8758c86f33ab9f9fe9207c21d2fc..ac387b9680724a08fa2f52c242ce9e7d
 -    implementation(project(":petal-api")) // Purpur // petal
 +    implementation(project(":bee-api")) // Purpur // petal // Bee
      // Pufferfish start
-     implementation("io.papermc.paper:paper-mojangapi:1.19.2-R0.1-SNAPSHOT") {
+     implementation("io.papermc.paper:paper-mojangapi:1.19.3-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
-@@ -78,13 +78,13 @@ tasks.jar {
+@@ -77,13 +77,13 @@ tasks.jar {
      manifest {
          val git = Git(rootProject.layout.projectDirectory.path)
          val gitHash = git("rev-parse", "--short=7", "HEAD").getText().trim()
@@ -35,7 +35,7 @@ index 6c93b36f1faa8758c86f33ab9f9fe9207c21d2fc..ac387b9680724a08fa2f52c242ce9e7d
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index f10c8cde1bf11db618fcd128aa60c3b524746360..9e8d22dd17e33ac5ed4fc73c251d57776eb397ec 100644
+index 6bb291fc0a81f422dce42390c4fe1c331838db9e..679c892b29c6aa04b04fd4041decabbe9649c3e1 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -51,8 +51,8 @@ index f10c8cde1bf11db618fcd128aa60c3b524746360..9e8d22dd17e33ac5ed4fc73c251d5777
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() ? "bungee" : "offline"))); // Purpur
--                metrics.addCustomChart(new Metrics.SimplePie("petal_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // petal
-+                metrics.addCustomChart(new Metrics.SimplePie("bee_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // petal // Bee
+-                metrics.addCustomChart(new Metrics.SimplePie("petal_version", () -> (org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() != null) ? org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // petal
++                metrics.addCustomChart(new Metrics.SimplePie("bee_version", () -> (org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() != null) ? org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // petal // Bee
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
@@ -72,10 +72,10 @@ index 3f9aa4292ff45c6b6af0ddfeecb645f813ec5eca..74073c257b6a43d14de64bcd3cb531b3
  
          return history != null ? Component.join(net.kyori.adventure.text.JoinConfiguration.separator(Component.newline()), history, updateMessage) : updateMessage; // Purpur
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 04a11f74620232911d71de7b5d24d8fc01251070..646f3e8fb3c63add3e01667e1910eac0d3874c8b 100644
+index 24f2800f4126e73e23d4ab0148ce8a1cb7bf42e7..1d3b5faf77c1a315217c9ed40b93c776ecbc3737 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -926,7 +926,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -927,7 +927,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -85,10 +85,10 @@ index 04a11f74620232911d71de7b5d24d8fc01251070..646f3e8fb3c63add3e01667e1910eac0
                  this.getRunningThread().stop();
                  try {
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index d6c563dff2e816e043e096f8286e3d975cc86290..8a9b4d7a2fd57d284329f5987ece91b29ac4f1ed 100644
+index 46858fb57f122033a68aeb4ad3943132a677fb46..0ecd110a8283df0fa76202640170e6813bc7f562 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -232,6 +232,15 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -227,6 +227,15 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          }
          org.purpurmc.purpur.PurpurConfig.registerCommands();
          // Purpur end
@@ -105,10 +105,10 @@ index d6c563dff2e816e043e096f8286e3d975cc86290..8a9b4d7a2fd57d284329f5987ece91b2
          io.papermc.paper.brigadier.PaperBrigadierProviderImpl.INSTANCE.getClass(); // init PaperBrigadierProvider
          // Paper end
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 0bb14272d024af90e7aef40f2f694e184af607d3..934150603aedf4fa74d5af666891ac6f04107087 100644
+index a9289072b048095330ea32d7c965e8dda61a36fc..1ecff4ea34d8aa753f3f2134c5014db6dd7d48d2 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -176,6 +176,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -175,6 +175,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
      public final com.destroystokyo.paper.antixray.ChunkPacketBlockController chunkPacketBlockController; // Paper - Anti-Xray
      public final org.purpurmc.purpur.PurpurWorldConfig purpurConfig; // Purpur
  
@@ -116,7 +116,7 @@ index 0bb14272d024af90e7aef40f2f694e184af607d3..934150603aedf4fa74d5af666891ac6f
      public final co.aikar.timings.WorldTimingsHandler timings; // Paper
      public static BlockPos lastPhysicsProblem; // Spigot
      private org.spigotmc.TickLimiter entityLimiter;
-@@ -331,6 +332,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -330,6 +331,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
          this.spigotConfig = new org.spigotmc.SpigotWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName()); // Spigot
          this.paperConfig = paperWorldConfigCreator.apply(this.spigotConfig); // Paper
          this.purpurConfig = new org.purpurmc.purpur.PurpurWorldConfig(((net.minecraft.world.level.storage.PrimaryLevelData) worlddatamutable).getLevelName(), env); // Purpur
@@ -125,10 +125,10 @@ index 0bb14272d024af90e7aef40f2f694e184af607d3..934150603aedf4fa74d5af666891ac6f
          this.generator = gen;
          this.world = new CraftWorld((ServerLevel) this, gen, biomeProvider, env);
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a05e74a74eaa7689656e2f13bbde992af226e404..488e84447d9f85ebc67ab6045cb6f7fddf176b11 100644
+index bab1a3f721f2ded483b29718631ed79ab92b6339..f3be2fbde0958026913f9ed2284f4ac3f2108e4a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -249,7 +249,7 @@ import javax.annotation.Nullable; // Paper
+@@ -262,7 +262,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -137,7 +137,7 @@ index a05e74a74eaa7689656e2f13bbde992af226e404..488e84447d9f85ebc67ab6045cb6f7fd
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
-@@ -1013,6 +1013,7 @@ public final class CraftServer implements Server {
+@@ -1026,6 +1026,7 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.init((File) console.options.valueOf("spigot-settings")); // Spigot
          this.console.paperConfigurations.reloadConfigs(this.console);
          org.purpurmc.purpur.PurpurConfig.init((File) console.options.valueOf("purpur-settings")); // Purpur
@@ -145,7 +145,7 @@ index a05e74a74eaa7689656e2f13bbde992af226e404..488e84447d9f85ebc67ab6045cb6f7fd
          for (ServerLevel world : this.console.getAllLevels()) {
              // world.serverLevelData.setDifficulty(config.difficulty); // Paper - per level difficulty
              world.setSpawnSettings(world.serverLevelData.getDifficulty() != Difficulty.PEACEFUL && config.spawnMonsters, config.spawnAnimals); // Paper - per level difficulty (from MinecraftServer#setDifficulty(ServerLevel, Difficulty, boolean))
-@@ -1029,6 +1030,7 @@ public final class CraftServer implements Server {
+@@ -1042,6 +1043,7 @@ public final class CraftServer implements Server {
              }
              world.spigotConfig.init(); // Spigot
              world.purpurConfig.init(); // Purpur
@@ -153,7 +153,7 @@ index a05e74a74eaa7689656e2f13bbde992af226e404..488e84447d9f85ebc67ab6045cb6f7fd
          }
  
          Plugin[] pluginClone = pluginManager.getPlugins().clone(); // Paper
-@@ -2852,6 +2854,13 @@ public final class CraftServer implements Server {
+@@ -2879,6 +2881,13 @@ public final class CraftServer implements Server {
          }
          // Purpur end
  
@@ -168,7 +168,7 @@ index a05e74a74eaa7689656e2f13bbde992af226e404..488e84447d9f85ebc67ab6045cb6f7fd
          public void restart() {
              org.spigotmc.RestartCommand.restart();
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 8a4c8701122edf2f29edbe97e4fa199da2744e9e..7946eca5bfda916b9f6e8b91d3e450133578e889 100644
+index 576cd8e20982bb20d10213b6c7a229428eec1c2f..257634374a4e4fa451c986974e6862daf81d78d3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
 @@ -180,6 +180,14 @@ public class Main {
@@ -187,10 +187,10 @@ index 8a4c8701122edf2f29edbe97e4fa199da2744e9e..7946eca5bfda916b9f6e8b91d3e45013
                  acceptsAll(asList("server-name"), "Name of the server")
                          .withRequiredArg()
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index b1e11bb17212174e546892cbaa04740e632cd075..527b685faf2bc80ff0eaa7b890af4d8a8a63143f 100644
+index 51c96095cf7092125f79a197f797dc7965647574..caba5fa45d42a88648b914ce443714b542b2a499 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -435,7 +435,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -433,7 +433,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
@@ -213,11 +213,11 @@ index 8c0215954360adf6c51bd71994273e8b6b8e07a3..a18adbc2b2404c3244edf872fc8aae2d
  
          if (stream != null) {
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index ccca392a45cb05abb55ddd5c6c36e6f9c7a5d171..52589e33adfee31689cd3fad30d35c83a36d1bef 100644
+index c7c0ed8dfe58c841faf684a1fe228eeda6cd57b7..2dc984285f43121ade5ed74df599da2b83ccc5c9 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -244,7 +244,7 @@ public class PurpurConfig {
-         if (!TimingsManager.hiddenConfigs.contains("settings.seed")) TimingsManager.hiddenConfigs.add("settings.seed");
+@@ -227,7 +227,7 @@ public class PurpurConfig {
+         deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
  
 -    public static String serverModName = "Purpur";

@@ -8,10 +8,10 @@ https://github.com/PaperMC/Paper/pull/8418
 Explanation : https://github.com/PaperMC/Paper/pull/6957#issuecomment-985250854
 
 diff --git a/src/main/java/net/minecraft/network/FriendlyByteBuf.java b/src/main/java/net/minecraft/network/FriendlyByteBuf.java
-index a7b6e22daf64abca311bc5771192a3c09368537f..8c655071799715787017ae5c6d91624af8a358f8 100644
+index 314318a21b6fa9e827945d8996c6ed0f9679a4eb..78731378ae7f1ae694853561ffc0d464d0ba796b 100644
 --- a/src/main/java/net/minecraft/network/FriendlyByteBuf.java
 +++ b/src/main/java/net/minecraft/network/FriendlyByteBuf.java
-@@ -90,6 +90,18 @@ public class FriendlyByteBuf extends ByteBuf {
+@@ -96,6 +96,18 @@ public class FriendlyByteBuf extends ByteBuf {
      }
  
      public static int getVarIntSize(int value) {
@@ -30,7 +30,7 @@ index a7b6e22daf64abca311bc5771192a3c09368537f..8c655071799715787017ae5c6d91624a
          for (int j = 1; j < 5; ++j) {
              if ((value & -1 << j * 7) == 0) {
                  return j;
-@@ -506,6 +518,21 @@ public class FriendlyByteBuf extends ByteBuf {
+@@ -568,6 +580,21 @@ public class FriendlyByteBuf extends ByteBuf {
      }
  
      public FriendlyByteBuf writeVarInt(int value) {

@@ -7,10 +7,10 @@ These changes applies great for most servers.
 Check https://github.com/YouHaveTrouble/minecraft-optimization and https://paper-chan.moe/paper-optimization/ for further optimizations.
 
 diff --git a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-index c9ae76401278057f87ebef13619a114722e81a1d..44ba03744c3cd22a62dd0ee941a8c047cdcba16f 100644
+index f3593297929842b52e4467ed4386ab12586b1b70..7dd530d1563e3a137fd1bc3a0b5e0952ed219bb3 100644
 --- a/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
 +++ b/src/main/java/gg/pufferfish/pufferfish/PufferfishConfig.java
-@@ -239,7 +239,7 @@ public class PufferfishConfig {
+@@ -223,7 +223,7 @@ public class PufferfishConfig {
      public static int activationDistanceMod;
  
      private static void dynamicActivationOfBrains() throws IOException {
@@ -19,7 +19,7 @@ index c9ae76401278057f87ebef13619a114722e81a1d..44ba03744c3cd22a62dd0ee941a8c047
          startDistance = getInt("dab.start-distance", "activation-range.start-distance", 12,
                  "This value determines how far away an entity has to be",
                  "from the player to start being effected by DEAR.");
-@@ -283,7 +283,7 @@ public class PufferfishConfig {
+@@ -267,7 +267,7 @@ public class PufferfishConfig {
      
      public static boolean throttleInactiveGoalSelectorTick;
  	private static void inactiveGoalSelectorThrottle() {
@@ -29,10 +29,10 @@ index c9ae76401278057f87ebef13619a114722e81a1d..44ba03744c3cd22a62dd0ee941a8c047
  				"This can improve performance by a few percent, but has minor gameplay implications.");
  	}
 diff --git a/src/main/java/io/papermc/paper/configuration/WorldConfiguration.java b/src/main/java/io/papermc/paper/configuration/WorldConfiguration.java
-index 5982dda61e07f1661b0a68d0ba1fcc1122e8d428..e818e51a36d561b8d30ab5528f2413f5549aa928 100644
+index 4532f3a0d74feae0a1249b53e1bfbc18a8808b32..6189d693a94a01feaa58723c844abdecc7aa2ace 100644
 --- a/src/main/java/io/papermc/paper/configuration/WorldConfiguration.java
 +++ b/src/main/java/io/papermc/paper/configuration/WorldConfiguration.java
-@@ -313,7 +313,7 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -317,7 +317,7 @@ public class WorldConfiguration extends ConfigurationPart {
      public class Environment extends ConfigurationPart {
          public boolean disableThunder = false;
          public boolean disableIceAndSnow = false;
@@ -41,7 +41,7 @@ index 5982dda61e07f1661b0a68d0ba1fcc1122e8d428..e818e51a36d561b8d30ab5528f2413f5
          public boolean disableExplosionKnockback = false;
          public boolean generateFlatBedrock = false;
          public FrostedIce frostedIce;
-@@ -351,7 +351,7 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -355,7 +355,7 @@ public class WorldConfiguration extends ConfigurationPart {
      public class Spawn extends ConfigurationPart {
          @RequiresSpigotInitialization(SpawnLoadedRangeInitializer.class)
          public short keepSpawnLoadedRange = 10;
@@ -50,7 +50,7 @@ index 5982dda61e07f1661b0a68d0ba1fcc1122e8d428..e818e51a36d561b8d30ab5528f2413f5
          public boolean allowUsingSignsInsideSpawnProtection = false;
      }
  
-@@ -365,7 +365,7 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -369,7 +369,7 @@ public class WorldConfiguration extends ConfigurationPart {
      public Fixes fixes;
  
      public class Fixes extends ConfigurationPart {
@@ -59,7 +59,7 @@ index 5982dda61e07f1661b0a68d0ba1fcc1122e8d428..e818e51a36d561b8d30ab5528f2413f5
          public boolean disableUnloadedChunkEnderpearlExploit = true;
          public boolean preventTntFromMovingInWater = false;
          public boolean splitOverstackedLoot = true;
-@@ -393,9 +393,9 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -397,9 +397,9 @@ public class WorldConfiguration extends ConfigurationPart {
      public class Collisions extends ConfigurationPart {
          public boolean onlyPlayersCollide = false;
          public boolean allowVehicleCollisions = true;
@@ -71,16 +71,16 @@ index 5982dda61e07f1661b0a68d0ba1fcc1122e8d428..e818e51a36d561b8d30ab5528f2413f5
          public boolean allowPlayerCrammingDamage = false;
      }
  
-@@ -405,7 +405,7 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -409,7 +409,7 @@ public class WorldConfiguration extends ConfigurationPart {
          public AutosavePeriod autoSaveInterval = AutosavePeriod.def();
          public int maxAutoSaveChunksPerTick = 24;
          public int fixedChunkInhabitedTime = -1;
 -        public boolean preventMovingIntoUnloadedChunks = false;
 +        public boolean preventMovingIntoUnloadedChunks = true; // Bee - Prevent main thread lags.
          public Duration delayChunkUnloadsBy = Duration.of("10s");
-         public Reference2IntMap<EntityType<?>> entityPerChunkSaveLimit = Util.make(new Reference2IntOpenHashMap<>(Registry.ENTITY_TYPE.size()), map -> {
+         public Reference2IntMap<EntityType<?>> entityPerChunkSaveLimit = Util.make(new Reference2IntOpenHashMap<>(BuiltInRegistries.ENTITY_TYPE.size()), map -> {
              map.defaultReturnValue(-1);
-@@ -456,7 +456,7 @@ public class WorldConfiguration extends ConfigurationPart {
+@@ -460,7 +460,7 @@ public class WorldConfiguration extends ConfigurationPart {
          public int lightQueueSize = 20;
          public boolean updatePathfindingOnBlockUpdate = true;
          public boolean showSignClickCommandFailureMsgsToPlayer = false;
