@@ -3,7 +3,7 @@ From: peaches94 <peachescu94@gmail.com>
 Date: Tue, 14 Jun 2022 21:20:31 -0500
 Subject: [PATCH] Petal Server Changes
 
-Andromeda's Petal implementation for 1.19.3 <https://github.com/TeamEarendel/Andromeda/blob/HEAD/patches/server/0016-Petal-Server-Patches.patch>
+Andromeda's Petal implementation for 1.19.3 <https://github.com/TeamEarendel/Andromeda/blob/61ec8de44c2d10159be72969e7e963d81317fb32/patches/server/0015-Petal-Server-Patches.patch>
 
 Petal <https://github.com/Bloom-host/Petal>
 
